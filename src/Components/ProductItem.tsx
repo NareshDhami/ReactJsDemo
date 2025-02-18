@@ -5,16 +5,12 @@ export default function ProductItem(props: any){
         props.onEdit(id);
     }
 
-    return ( 
-    <>
-        
-            <tr> 
-                <td key={id}>{ id }</td>  
-                <td>{ name }</td>
-                <td>{ qty }</td>
-                <td><button onClick={() => handleEdit(id)}>Edit</button></td>                           
-            </tr>            
-        
-    </>
-)
+    return (        
+        <tr key={id}> 
+            <td key={id}>{ id }</td>  
+            <td>{ name }</td>
+            <td>{ qty }</td>
+            <td><button onClick={() => handleEdit(id)}>Edit</button></td>                           
+        </tr>                  
+          )
 }

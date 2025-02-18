@@ -69,7 +69,7 @@ export default function CreateProduct(props: any){
         }
         </h3>
         <form onSubmit={handleSubmit}>
-        <table style={{ marginTop: "20px"}}>
+        <table id="createEditForm" style={{ marginTop: "20px"}}>
           <tbody>     
                 <tr> 
                     <td>Name:</td>  

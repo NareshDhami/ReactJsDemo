@@ -19,17 +19,17 @@ export default function ProductList(props: any){
         <h1>Product List</h1> 
         {
         props.products && (
-        <table>
+        <table id='productList'>
             <thead>
-                <tr>
+                <tr key="headerRow">
                     <th>Id</th>
                     <th>Name</th>
                     <th>Qty</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody key="productListBody">
             {
-              props.products.map( (item: any) => <ProductItem product = {item} onEdit ={handleEdit} />)                  
+              props.products.map( (item: Product) => <ProductItem key={item.id}  product = {item} onEdit ={handleEdit} />)                  
             }
             </tbody>
         </table>
