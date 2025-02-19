@@ -4,7 +4,8 @@ import Product from "../Models/Product";
 
 
 describe("product list component tests", () => {
-    let funcCall = jest.fn;
+    let mockEditCall = jest.fn;
+    let mockDeleteCall = jest.fn;
 
     let products: Product[] = [{
         id: 1,
@@ -19,7 +20,7 @@ describe("product list component tests", () => {
     ]
 
     it("render the list.", ()=> {       
-        render(<ProductList products = {products}/>);
+        render(<ProductList products = {products} onEdit={mockEditCall} onDelete={mockDeleteCall}/>);
         expect(screen.getByRole('table')).toBeInTheDocument();        
         expect(screen.getByText("Sample Product one")).toBeInTheDocument();
         expect(screen.getByText("1")).toBeInTheDocument();

@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import Product from "../Models/Product";
+import CreateEditProductProps from "../Models/CreateEditProductProps";
+import ValidationError from "../Models/ValidationError";
 
-interface validationError {
-    name: string;
-    qty: string;
-}
 
-export default function CreateProduct(props: any){
-    const {product, onSave} = props;
-    const [formData, setFormData] = useState<Product>(props.product);
-    const [errors, setErrors] = useState<validationError>({ name: "", qty: "" });
+const CreateProduct:React.FC<CreateEditProductProps> = ({product, onSave, onClearForm}) => {
+    const [formData, setFormData] = useState<Product>(product);
+    const [errors, setErrors] = useState<ValidationError>({ name: "", qty: "" });
         
     useEffect(() => {
       setFormData(product)
@@ -27,23 +24,21 @@ export default function CreateProduct(props: any){
     function handleSubmit(e: any): void {
        e.preventDefault();
        const validationErrors = validateForm();
+
        if(Object.keys(validationErrors).length > 0)
        {
-        console.log(`Keys: ${JSON.stringify(Object.keys(validationErrors))}`)
-        console.log("onSave is not called..", JSON.stringify(validationErrors), Object.keys(validationErrors).length);
-        setErrors(validationErrors);
+          console.log(`Keys: ${JSON.stringify(Object.keys(validationErrors))}`)
+          console.log("onSave is not called..", JSON.stringify(validationErrors), Object.keys(validationErrors).length);
+          setErrors(validationErrors);
        }
        else{
-        console.log("onSave is", onSave);
-        onSave(formData);
+          console.log("onSave is", onSave);
+          onSave(formData);
        }
     }
 
-    function validateForm(): validationError{
-      const newErrors: validationError  = {
-        name: "",
-        qty: ""
-      };
+    function validateForm(): ValidationError{
+      const newErrors: any  = {};
 
       if(!formData.name){
         newErrors.name = "Name is required";
@@ -58,7 +53,7 @@ export default function CreateProduct(props: any){
 
     function handleClearForm():void
     {
-      props.onClearForm();
+      onClearForm();
     }
 
     return ( 
@@ -115,3 +110,5 @@ export default function CreateProduct(props: any){
     </>   
 )
 }
+
+export default CreateProduct;
